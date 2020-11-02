@@ -3,11 +3,8 @@ Configure miss: jing
 Configure miss: fetch.h
 Configure miss: qsort_s
 Configure miss: whether need to declare optind
-Configure miss: curl_easy_init
-Configure miss: libcurl via curl-config
 Configure miss: ICU
 Configure miss: if libxml xmlEntity has name_length field
-Configure miss: libcurl library
 Configure miss: NFC library to use
 Configure miss: libinn.h usability
 Configure miss: libinn.h presence

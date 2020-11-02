@@ -266,8 +266,6 @@ libraptor2.so.0:raptor_option_get_count
 libraptor2.so.0:raptor_option_get_value_type_label
 libraptor2.so.0:raptor_option_is_valid_for_area
 libraptor2.so.0:raptor_option_value_is_numeric
-libraptor2.so.0:raptor_parse_date
-libraptor2.so.0:raptor_parsedate_parse
 libraptor2.so.0:raptor_parser_copy_flags_state
 libraptor2.so.0:raptor_parser_copy_user_state
 libraptor2.so.0:raptor_parser_end_graph
@@ -521,6 +519,11 @@ libraptor2.so.0:raptor_world_set_generate_bnodeid_parameters
 libraptor2.so.0:raptor_world_set_libxslt_security_preferences
 libraptor2.so.0:raptor_world_set_log_handler
 libraptor2.so.0:raptor_www_abort
+libraptor2.so.0:raptor_www_curl_fetch
+libraptor2.so.0:raptor_www_curl_free
+libraptor2.so.0:raptor_www_curl_init
+libraptor2.so.0:raptor_www_curl_set_ssl_cert_options
+libraptor2.so.0:raptor_www_curl_set_ssl_verify_options
 libraptor2.so.0:raptor_www_error
 libraptor2.so.0:raptor_www_fetch
 libraptor2.so.0:raptor_www_fetch_to_string
@@ -528,9 +531,6 @@ libraptor2.so.0:raptor_www_finish
 libraptor2.so.0:raptor_www_get_connection
 libraptor2.so.0:raptor_www_get_final_uri
 libraptor2.so.0:raptor_www_init
-libraptor2.so.0:raptor_www_libxml_fetch
-libraptor2.so.0:raptor_www_libxml_free
-libraptor2.so.0:raptor_www_libxml_init
 libraptor2.so.0:raptor_www_set_connection_timeout
 libraptor2.so.0:raptor_www_set_content_type_handler
 libraptor2.so.0:raptor_www_set_final_uri_handler

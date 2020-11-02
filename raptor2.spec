@@ -6,17 +6,17 @@
 #
 Name     : raptor2
 Version  : 2.0.15
-Release  : 2
+Release  : 3
 URL      : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source0  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
-Source99 : http://download.librdf.org/source/raptor2-2.0.15.tar.gz.asc
+Source1  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz.asc
 Summary  : RDF Syntax Library
 Group    : Development/Tools
 License  : Apache-2.0 GPL-2.0 LGPL-2.1
-Requires: raptor2-bin
-Requires: raptor2-lib
-Requires: raptor2-license
-Requires: raptor2-man
+Requires: raptor2-bin = %{version}-%{release}
+Requires: raptor2-lib = %{version}-%{release}
+Requires: raptor2-license = %{version}-%{release}
+Requires: raptor2-man = %{version}-%{release}
 BuildRequires : bison
 BuildRequires : buildreq-cmake
 BuildRequires : curl-dev
@@ -30,6 +30,7 @@ BuildRequires : libxml2-dev
 BuildRequires : libxslt
 BuildRequires : libxslt-bin
 BuildRequires : libxslt-dev
+BuildRequires : pkgconfig(glib-2.0)
 BuildRequires : pkgconfig(libcurl)
 BuildRequires : pkgconfig(libxml-2.0)
 BuildRequires : xz-dev
@@ -54,8 +55,7 @@ abbreviated, XMP), Turtle 2013, N-Quads, N-Triples 1.1, Atom 1.0, RSS
 %package bin
 Summary: bin components for the raptor2 package.
 Group: Binaries
-Requires: raptor2-license
-Requires: raptor2-man
+Requires: raptor2-license = %{version}-%{release}
 
 %description bin
 bin components for the raptor2 package.
@@ -64,9 +64,10 @@ bin components for the raptor2 package.
 %package dev
 Summary: dev components for the raptor2 package.
 Group: Development
-Requires: raptor2-lib
-Requires: raptor2-bin
-Provides: raptor2-devel
+Requires: raptor2-lib = %{version}-%{release}
+Requires: raptor2-bin = %{version}-%{release}
+Provides: raptor2-devel = %{version}-%{release}
+Requires: raptor2 = %{version}-%{release}
 
 %description dev
 dev components for the raptor2 package.
@@ -75,7 +76,7 @@ dev components for the raptor2 package.
 %package doc
 Summary: doc components for the raptor2 package.
 Group: Documentation
-Requires: raptor2-man
+Requires: raptor2-man = %{version}-%{release}
 
 %description doc
 doc components for the raptor2 package.
@@ -84,7 +85,7 @@ doc components for the raptor2 package.
 %package lib
 Summary: lib components for the raptor2 package.
 Group: Libraries
-Requires: raptor2-license
+Requires: raptor2-license = %{version}-%{release}
 
 %description lib
 lib components for the raptor2 package.
@@ -108,30 +109,41 @@ man components for the raptor2 package.
 
 %prep
 %setup -q -n raptor2-2.0.15
+cd %{_builddir}/raptor2-2.0.15
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1533753998
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1604354734
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1533753998
+export SOURCE_DATE_EPOCH=1604354734
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/raptor2
-cp COPYING %{buildroot}/usr/share/doc/raptor2/COPYING
-cp COPYING.LIB %{buildroot}/usr/share/doc/raptor2/COPYING.LIB
-cp LICENSE-2.0.txt %{buildroot}/usr/share/doc/raptor2/LICENSE-2.0.txt
+mkdir -p %{buildroot}/usr/share/package-licenses/raptor2
+cp %{_builddir}/raptor2-2.0.15/COPYING %{buildroot}/usr/share/package-licenses/raptor2/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+cp %{_builddir}/raptor2-2.0.15/COPYING.LIB %{buildroot}/usr/share/package-licenses/raptor2/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/raptor2-2.0.15/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/raptor2/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/raptor2-2.0.15/LICENSE.html %{buildroot}/usr/share/package-licenses/raptor2/03c4dbd3651cbaa98383f73b4d008e47f0e289cd
+cp %{_builddir}/raptor2-2.0.15/LICENSE.txt %{buildroot}/usr/share/package-licenses/raptor2/19aba05b5b65bf9e591d8e129ac81af3b3e1152e
 %make_install
 
 %files
@@ -255,11 +267,13 @@ cp LICENSE-2.0.txt %{buildroot}/usr/share/doc/raptor2/LICENSE-2.0.txt
 /usr/lib64/libraptor2.so.0.0.0
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/raptor2/COPYING
-/usr/share/doc/raptor2/COPYING.LIB
-/usr/share/doc/raptor2/LICENSE-2.0.txt
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/raptor2/03c4dbd3651cbaa98383f73b4d008e47f0e289cd
+/usr/share/package-licenses/raptor2/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
+/usr/share/package-licenses/raptor2/19aba05b5b65bf9e591d8e129ac81af3b3e1152e
+/usr/share/package-licenses/raptor2/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/raptor2/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man1/rapper.1
