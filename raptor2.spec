@@ -6,7 +6,7 @@
 #
 Name     : raptor2
 Version  : 2.0.15
-Release  : 3
+Release  : 4
 URL      : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source0  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source1  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz.asc
@@ -36,6 +36,7 @@ BuildRequires : pkgconfig(libxml-2.0)
 BuildRequires : xz-dev
 BuildRequires : yajl-dev
 BuildRequires : zlib-dev
+Patch1: CVE-2017-18926.patch
 
 %description
 #DOAP
@@ -110,21 +111,22 @@ man components for the raptor2 package.
 %prep
 %setup -q -n raptor2-2.0.15
 cd %{_builddir}/raptor2-2.0.15
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604354734
+export SOURCE_DATE_EPOCH=1613016917
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -mzero-caller-saved-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -136,7 +138,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1604354734
+export SOURCE_DATE_EPOCH=1613016917
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/raptor2
 cp %{_builddir}/raptor2-2.0.15/COPYING %{buildroot}/usr/share/package-licenses/raptor2/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
