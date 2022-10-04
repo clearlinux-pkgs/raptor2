@@ -1,12 +1,12 @@
-Configure miss: bison3
-Configure miss: jing
-Configure miss: fetch.h
-Configure miss: qsort_s
-Configure miss: whether need to declare optind
 Configure miss: ICU
-Configure miss: if libxml xmlEntity has name_length field
 Configure miss: NFC library to use
-Configure miss: libinn.h usability
-Configure miss: libinn.h presence
+Configure miss: bison3
+Configure miss: fetch.h
+Configure miss: if libxml xmlEntity has name_length field
+Configure miss: jing
 Configure miss: libinn.h
+Configure miss: libinn.h presence
+Configure miss: libinn.h usability
+Configure miss: qsort_s
 Configure miss: using memory signing
+Configure miss: whether need to declare optind

@@ -6,7 +6,7 @@
 #
 Name     : raptor2
 Version  : 2.0.15
-Release  : 5
+Release  : 6
 URL      : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source0  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source1  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz.asc
@@ -118,15 +118,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1613016917
+export SOURCE_DATE_EPOCH=1664912502
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 -fstack-protector-strong -fzero-call-used-regs=used "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto -fstack-protector-strong -fzero-call-used-regs=used "
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -138,14 +138,14 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1613016917
+export SOURCE_DATE_EPOCH=1664912502
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/raptor2
-cp %{_builddir}/raptor2-2.0.15/COPYING %{buildroot}/usr/share/package-licenses/raptor2/06877624ea5c77efe3b7e39b0f909eda6e25a4ec
-cp %{_builddir}/raptor2-2.0.15/COPYING.LIB %{buildroot}/usr/share/package-licenses/raptor2/9a1929f4700d2407c70b507b3b2aaf6226a9543c
-cp %{_builddir}/raptor2-2.0.15/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/raptor2/2b8b815229aa8a61e483fb4ba0588b8b6c491890
-cp %{_builddir}/raptor2-2.0.15/LICENSE.html %{buildroot}/usr/share/package-licenses/raptor2/03c4dbd3651cbaa98383f73b4d008e47f0e289cd
-cp %{_builddir}/raptor2-2.0.15/LICENSE.txt %{buildroot}/usr/share/package-licenses/raptor2/19aba05b5b65bf9e591d8e129ac81af3b3e1152e
+cp %{_builddir}/raptor2-%{version}/COPYING %{buildroot}/usr/share/package-licenses/raptor2/06877624ea5c77efe3b7e39b0f909eda6e25a4ec || :
+cp %{_builddir}/raptor2-%{version}/COPYING.LIB %{buildroot}/usr/share/package-licenses/raptor2/9a1929f4700d2407c70b507b3b2aaf6226a9543c || :
+cp %{_builddir}/raptor2-%{version}/LICENSE-2.0.txt %{buildroot}/usr/share/package-licenses/raptor2/2b8b815229aa8a61e483fb4ba0588b8b6c491890 || :
+cp %{_builddir}/raptor2-%{version}/LICENSE.html %{buildroot}/usr/share/package-licenses/raptor2/03c4dbd3651cbaa98383f73b4d008e47f0e289cd || :
+cp %{_builddir}/raptor2-%{version}/LICENSE.txt %{buildroot}/usr/share/package-licenses/raptor2/19aba05b5b65bf9e591d8e129ac81af3b3e1152e || :
 %make_install
 
 %files
