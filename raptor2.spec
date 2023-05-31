@@ -7,7 +7,7 @@
 #
 Name     : raptor2
 Version  : 2.0.15
-Release  : 7
+Release  : 8
 URL      : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source0  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz
 Source1  : http://download.librdf.org/source/raptor2-2.0.15.tar.gz.asc
@@ -125,7 +125,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683659864
+export SOURCE_DATE_EPOCH=1685510279
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -157,7 +157,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || : || :
 
 %install
-export SOURCE_DATE_EPOCH=1683659864
+export SOURCE_DATE_EPOCH=1685510279
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/raptor2
 cp %{_builddir}/raptor2-%{version}/COPYING %{buildroot}/usr/share/package-licenses/raptor2/06877624ea5c77efe3b7e39b0f909eda6e25a4ec || :
@@ -181,7 +181,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libraptor2.so
 /usr/include/raptor2/raptor.h
 /usr/include/raptor2/raptor2.h
 /usr/lib64/libraptor2.so
@@ -290,7 +289,6 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libraptor2.so.0
 /V3/usr/lib64/libraptor2.so.0.0.0
 /usr/lib64/libraptor2.so.0
 /usr/lib64/libraptor2.so.0.0.0
