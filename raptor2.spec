@@ -9,7 +9,7 @@
 #
 Name     : raptor2
 Version  : 2.0.16
-Release  : 9
+Release  : 10
 URL      : https://download.librdf.org/source/raptor2-2.0.16.tar.gz
 Source0  : https://download.librdf.org/source/raptor2-2.0.16.tar.gz
 Source1  : https://download.librdf.org/source/raptor2-2.0.16.tar.gz.asc
